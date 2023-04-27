@@ -9,4 +9,4 @@ helloworld:
     pullPolicy: IfNotPresent
   service:
     ingressClass: internal-ingress
-  replicas: 3
+  replicas: 1
