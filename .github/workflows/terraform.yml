@@ -68,6 +68,10 @@ jobs:
           name: plan
           path: ./terraform
 
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: ls && terraform init
+        
       - name: Terraform Apply
         working-directory: ./terraform
         run: terraform apply plan
