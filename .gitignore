@@ -1,0 +1,5 @@
+.terraform
+*.tfvars
+*.tfstate.backup
+.terraformrc
+.terraformrc.json
