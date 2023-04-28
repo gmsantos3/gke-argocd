@@ -20,16 +20,16 @@ jobs:
           terraform_version: "1.0.8"
 
       - name: Terraform Init
-        run: terraform init -backend-config=./terraform/terraform.tfvars
+        run: terraform init -backend-config=./terraform.tfvars
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
+        run: terraform plan -out=plan
 
       - name: Save Terraform Plan
         uses: actions/upload-artifact@v2
         with:
-          name: tfplan
-          path: tfplan
+          name: plan
+          path: plan
 
   apply:
     needs: plan
@@ -48,8 +48,8 @@ jobs:
       - name: Download Terraform Plan
         uses: actions/download-artifact@v2
         with:
-          name: tfplan
+          name: plan
           path: .
 
       - name: Terraform Apply
-        run: terraform apply tfplan
+        run: terraform apply plan
