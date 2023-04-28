@@ -76,3 +76,29 @@ jobs:
       - name: Terraform Apply
         working-directory: ./terraform
         run: terraform apply plan
+  
+  destroy: 
+    if: "contains(github.event.head_commit.message, 'destroy')"
+    environment: 'terraform'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_SERVICE_ACCOUNT }}'
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: "1.4.6"
+
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: ./terraform
+        run: terraform destroy
