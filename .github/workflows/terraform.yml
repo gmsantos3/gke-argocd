@@ -102,4 +102,4 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ./terraform
-        run: terraform destroy
+        run: terraform destroy -auto-aprove
