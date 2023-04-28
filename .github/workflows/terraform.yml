@@ -43,7 +43,7 @@ jobs:
 
   apply:
     needs: plan
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
