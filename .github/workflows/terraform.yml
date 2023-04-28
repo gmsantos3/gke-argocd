@@ -26,9 +26,11 @@ jobs:
         run: ls && terraform init -backend-config=terraform.tfvars
 
       - name: Terraform Plan
+        working-directory: ./terraform
         run: terraform plan -out=plan
 
       - name: Save Terraform Plan
+        working-directory: ./terraform
         uses: actions/upload-artifact@v2
         with:
           name: plan
@@ -49,10 +51,12 @@ jobs:
           terraform_version: "1.4.6"
 
       - name: Download Terraform Plan
+        working-directory: ./terraform
         uses: actions/download-artifact@v2
         with:
           name: plan
           path: .
 
       - name: Terraform Apply
+        working-directory: ./terraform
         run: terraform apply plan

@@ -1,3 +1,7 @@
+terraform {
+  backend "local" {}
+}
+
 variable "gke_username" {
   default     = ""
   description = "gke username"
