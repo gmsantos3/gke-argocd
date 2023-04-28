@@ -20,7 +20,7 @@ jobs:
           terraform_version: "1.0.8"
 
       - name: Terraform Init
-        run: terraform init -backend-config=./terraform.tfvars
+        run: ls && terraform init -backend-config=./terraform.tfvars
 
       - name: Terraform Plan
         run: terraform plan -out=plan
