@@ -27,7 +27,7 @@ jobs:
 
       - name: Wait for approval
         if: github.ref == 'refs/heads/main'
-        uses: deepaksinghvi/wait-for-approval@v1
+        uses: thollander/wait-for-approval@v1
         with:
           message: "Do you want to apply the Terraform plan?"
 
