@@ -22,7 +22,8 @@ jobs:
           terraform_version: "1.4.6"
 
       - name: Terraform Init
-        run: ls ./terraform && terraform init -backend-config=./terraform/terraform.tfvars
+        working-directory: ./terraform
+        run: ls && terraform init -backend-config=terraform.tfvars
 
       - name: Terraform Plan
         run: terraform plan -out=plan
