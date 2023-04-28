@@ -79,6 +79,7 @@ jobs:
   
   destroy: 
     if: "contains(github.event.head_commit.message, 'destroy')"
+    runs-on: ubuntu-latest
     environment: 'terraform'
     steps:
       - name: Checkout code
