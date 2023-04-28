@@ -1,0 +1,36 @@
+name: Terraform Plan
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    if: "contains(github.event.head_commit.message, 'terraform')"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: "1.0.8"
+
+      - name: Terraform Init
+        run: terraform init -backend-config=./terraform.tfvars
+
+      - name: Terraform Plan
+        run: terraform plan -out=plan
+
+      - name: Wait for approval
+        if: github.ref == 'refs/heads/main'
+        uses: deepaksinghvi/wait-for-approval@v1
+        with:
+          message: "Do you want to apply the Terraform plan?"
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+        run: terraform apply tfplan
