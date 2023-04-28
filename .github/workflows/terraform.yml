@@ -19,7 +19,7 @@ jobs:
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: "1.0.8"
+          terraform_version: "1.4.6"
 
       - name: Terraform Init
         run: ls ./terraform && terraform init -backend-config=./terraform/terraform.tfvars
@@ -45,7 +45,7 @@ jobs:
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: "1.0.8"
+          terraform_version: "1.4.6"
 
       - name: Download Terraform Plan
         uses: actions/download-artifact@v2
