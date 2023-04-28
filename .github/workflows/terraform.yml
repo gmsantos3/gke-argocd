@@ -23,7 +23,7 @@ jobs:
 
       - name: Terraform Init
         working-directory: ./terraform
-        run: ls && terraform init -backend-config=terraform.tfvars
+        run: ls && terraform init
 
       - name: Terraform Plan
         working-directory: ./terraform
