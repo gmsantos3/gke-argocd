@@ -13,7 +13,7 @@ variable "gke_password" {
 }
 
 variable "gke_num_nodes" {
-  default     = 3
+  default     = 2
   description = "number of gke nodes"
 }
 
@@ -30,10 +30,6 @@ resource "google_container_cluster" "primary" {
   name     = "${var.project_id}-cluster"
   project  = "${var.project_id}"
   location = var.region
-  
-  # We can't create a cluster with no node pool defined, but we want to only use
-  # separately managed node pools. So we create the smallest possible default
-  # node pool and immediately delete it.
   remove_default_node_pool = true
   initial_node_count       = 1
 }
@@ -56,8 +52,8 @@ resource "google_container_node_pool" "primary_nodes" {
       env = var.project_id
     }
 
-    # preemptible  = true
     machine_type = "g1-small"
+    disk_size_gb = 30
     tags         = ["gke-node", "${var.project_id}-gke"]
     metadata = {
       disable-legacy-endpoints = "true"
